@@ -1,82 +1,76 @@
-#!/usr/bin/env bash
-set -euo pipefail
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2
+TARGET = main
 
-print_help() {
-  cat <<EOF
-Usage:
-  ./finished <problem_number> <folder>
+# 파일 목록 관리
+SRCS = $(wildcard *.cpp)
+IN_FILES = $(wildcard *.in)
 
-Example:
-  ./finished 12186 BOJ
+.PHONY: run clean judge help all $(SRCS) $(IN_FILES)
+.ONESHELL:
 
-Behavior:
-  1. 현재 디렉토리에 .cpp 파일이 정확히 1개 있어야 합니다.
-  2. 해당 파일을 <folder>/<problem_number>/main.cpp 로 이동합니다.
-  3. *.in, *.out 파일을 같은 디렉토리로 이동합니다.
-  4. README.md 를 생성합니다.
-  5. template/main.cpp 를 루트 디렉토리의 main.cpp 로 복사합니다.
-EOF
-}
+# 기본 타겟
+all: help
 
-# 도움말
-if [ "$#" -eq 0 ]; then
-  print_help
-  exit 0
-fi
+# 1. 컴파일 규칙: make 21315.cpp
+$(SRCS):
+	@echo "--- Compiling $@ -> $(TARGET) ---"
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $@
 
-if [ "$#" -ne 2 ]; then
-  echo "Error: Invalid arguments."
-  echo
-  print_help
-  exit 1
-fi
+# 2. 실행 규칙: make run <입력파일>
+run:
+	@ARG="$(word 2,$(MAKECMDGOALS))"
+	@if [ -z "$$ARG" ]; then \
+		echo "--- Running $(TARGET) (Standard Input) ---"; \
+		./$(TARGET); \
+	else \
+		echo "--- Running $(TARGET) with input: $$ARG ---"; \
+		./$(TARGET) < "$$ARG"; \
+	fi
 
-PROBLEM="$1"
-ROOT_DIR="$2"
-TARGET_DIR="${ROOT_DIR}/${PROBLEM}"
+# 3. 채점 규칙: make judge
+# 모든 *.in 파일을 순회하며 *.out 파일과 비교합니다.
+judge:
+	@if [ ! -f "./$(TARGET)" ]; then \
+		echo "Error: $(TARGET) 가 없습니다. 먼저 컴파일하세요 (예: make filename.cpp)"; \
+		exit 1; \
+	fi
+	@count=0; \
+	pass=0; \
+	for in_file in $(IN_FILES); do \
+		base=$${in_file%.in}; \
+		out_file="$$base.out"; \
+		count=$$((count + 1)); \
+		echo -n "Test Case $$count ($$in_file): "; \
+		if [ ! -f "$$out_file" ]; then \
+			echo "SKIP (정답 파일 $$out_file 이 없습니다)"; \
+			continue; \
+		fi; \
+		./$(TARGET) < $$in_file > $$base.res; \
+		if diff -Z $$base.res $$out_file > /dev/null; then \
+			echo "PASS"; \
+			pass=$$((pass + 1)); \
+		else \
+			echo "FAIL"; \
+			echo "  [Diff 결과]"; \
+			diff -y -Z $$base.res $$out_file | head -n 5; \
+		fi; \
+		rm -f $$base.res; \
+	done; \
+	echo "--- Result: $$pass / $$count passed ---"
 
-# 1. cpp 파일 검사
-CPP_FILES=(*.cpp)
+# 자동완성을 위한 더미 타겟
+$(IN_FILES):
+	@:
+$(word 2,$(MAKECMDGOALS)):
+	@:
 
-if [ "${CPP_FILES[0]}" = "*.cpp" ]; then
-  echo "Error: No .cpp file found."
-  exit 1
-fi
+clean:
+	rm -f $(TARGET) $(TARGET).exe *.res
 
-if [ "${#CPP_FILES[@]}" -ne 1 ]; then
-  echo "Error: Multiple .cpp files found:"
-  printf ' - %s\n' "${CPP_FILES[@]}"
-  exit 1
-fi
-
-ORIGINAL_CPP="${CPP_FILES[0]}"
-
-# 2. 대상 디렉토리 생성
-mkdir -p "${TARGET_DIR}"
-
-# 3. 정답 cpp → 문제 폴더로 이동 + rename
-mv "${ORIGINAL_CPP}" "${TARGET_DIR}/main.cpp"
-
-# 4. *.in, *.out 이동
-shopt -s nullglob
-for f in *.in *.out; do
-  mv "$f" "${TARGET_DIR}/"
-done
-shopt -u nullglob
-
-# 5. README.md 생성
-cat > "${TARGET_DIR}/README.md" <<EOF
-# ${PROBLEM}
-
-https://www.acmicpc.net/problem/${PROBLEM}
-EOF
-
-# 6. template/main.cpp → 루트 main.cpp
-if [ ! -f template/main.cpp ]; then
-  echo "Error: template/main.cpp not found."
-  exit 1
-fi
-
-cp template/main.cpp main.cpp
-
-echo "Finished setup for problem ${PROBLEM}"
+help:
+	@echo "사용법:"
+	@echo "  make <파일명>.cpp      : 컴파일"
+	@echo "  make run <파일명>.in   : 특정 파일로 실행"
+	@echo "  make judge             : 모든 *.in / *.out 비교 채점"
+	@echo "  make clean             : 실행 파일 및 임시 결과 삭제"
