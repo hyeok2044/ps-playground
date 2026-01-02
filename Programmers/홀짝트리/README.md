@@ -12,7 +12,7 @@ odd / even / even / even    (node number)
 O   / X    / X    / X       (parity)
 ```
 
-only one has different parity.
+only one has same parity. (We can set the same parity one as root.)
 
 ### example of reverse-ordered tree
 
@@ -22,7 +22,7 @@ even / odd / odd / odd
 X    / O   / O   / O
 ```
 
-only one has same parity.
+only one has different parity. (Vice versa)
 
 ### edge case
 
