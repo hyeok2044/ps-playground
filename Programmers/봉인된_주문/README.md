@@ -1,5 +1,7 @@
 # 봉인된 주문
 
+Solved at: 2026-01-03 (15m)
+
 https://school.programmers.co.kr/learn/courses/30/lessons/389481
 
 1. Make a String -> Number, Number -> String Conversion.

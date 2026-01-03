@@ -1,5 +1,7 @@
 # 홀짝트리
 
+Solved at: 2026-01-02 (30m)
+
 https://school.programmers.co.kr/learn/courses/30/lessons/388354
 
 keypoint: true/rev ordered tree count is determined by its degree.
