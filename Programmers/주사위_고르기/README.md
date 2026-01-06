@@ -10,11 +10,11 @@ https://school.programmers.co.kr/learn/courses/30/lessons/258709
 
 2. Create `aSum/bSum[i][j]` that refers to:
 
-`i`: index of individual dice.
+   `i`: index of individual dice.
 
-`j`: sum of the dice
+   `j`: sum of the dice
 
-`aSum[i][j]`: number of dice combinations that can make up this result.
+   `aSum[i][j]`: number of dice combinations that can make up this result.
 
 3. Get the cumulative/prefix sum for B, and solve for the answer.
 
