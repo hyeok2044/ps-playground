@@ -13,6 +13,7 @@ int cntIndices(int n)
   }
   return cnt;
 }
+
 vector<int> solution(vector<vector<int>> dice)
 {
   vector<int> answer;
