@@ -10,9 +10,7 @@ DP - Maximum Subarray Sum
 
 Normal form
 
-```
-dp[i] = a[i] + max(dp[i-1], 0)
-```
+$$ dp[i] = a[i] + \max(dp[i-1], 0) $$
 
 We don't actually need array for this.
 
