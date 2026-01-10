@@ -23,19 +23,18 @@ Simulation
    ```
 
 3. Reverse the process.
+   - Even index (0, 2, 4th, ...) goes to the left.
 
-- Even index (0, 2, 4th, ...) goes to the left.
+   - Odd index (1, 3, 5th, ...) goes to the right.
 
-- Odd index (1, 3, 5th, ...) goes to the right.
-
-  ```
-  vector<char> ans(s.length());
-  int          leftIdx = 0, rightIdx = s.length() - 1;
-  for (int i = 0; i < s.length(); i++) {
-    if (i % 2 == 0) { // first
-      ans[leftIdx++] = s[i];
-    } else {
-      ans[rightIdx--] = s[i];
-    }
-  }
-  ```
+   ```
+   vector<char> ans(s.length());
+   int          leftIdx = 0, rightIdx = s.length() - 1;
+   for (int i = 0; i < s.length(); i++) {
+     if (i % 2 == 0) { // first
+       ans[leftIdx++] = s[i];
+     } else {
+       ans[rightIdx--] = s[i];
+     }
+   }
+   ```
