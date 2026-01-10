@@ -10,4 +10,7 @@ int main(void)
 {
   cin.tie(NULL);
   cout.tie(NULL);
+  int n, c, p;
+  cin >> n >> c >> p;
+  cout << n * p << endl;
 }
