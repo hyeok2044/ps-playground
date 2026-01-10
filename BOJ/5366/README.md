@@ -46,7 +46,7 @@ By default, values are initialized to zero.
   ```
 
 > Emplace creates things within the container.
-
+>
 > It is ignored if key already exists.
 
 ### Erase
@@ -76,4 +76,5 @@ By default, values are initialized to zero.
   ```
 
 > Main difference: `map`: ordered here, `unordered_map` is not ordered.
+>
 > `map`: RB-Tree $O(\log n)$, `unordered_map`: Hashmap $O(1)$
