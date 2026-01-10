@@ -4,7 +4,7 @@ using namespace std;
 
 typedef long long int ll;
 
-#define endl '\n';
+#define endl '\n'
 
 int main(void)
 {
