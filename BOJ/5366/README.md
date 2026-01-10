@@ -74,5 +74,5 @@ for (auto it = mp.begin(); it != mp.end(); it++) {
 }
 ```
 
-> > Main difference: `map`: ordered here, `unordered_map` is not ordered.
-> > `map`: RB-Tree $O(\log n)$, `unordered_map`: Hashmap $O(1)$
+> Main difference: `map`: ordered here, `unordered_map` is not ordered.
+> `map`: RB-Tree $O(\log n)$, `unordered_map`: Hashmap $O(1)$
