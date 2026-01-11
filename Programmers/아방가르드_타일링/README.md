@@ -17,10 +17,12 @@ Moreover, they are unique.
 ### DP Setting
 
 $$
-dp[i] = dp[i - 1] + 2 \cdot dp[i - 2] + 5 \cdot dp[i - 3] \\
-    + 2 \cdot dp[i - 4] + 2 \cdot dp[i - 5] + 4 \cdot dp[i - 6] \\
-    + 2 \cdot dp[i - 7] + 2 \cdot dp[i - 8] + 4 \cdot dp[i - 9] \\
-    \cdots
+\begin{aligned}
+dp[i] =\;& dp[i - 1] + 2 \cdot dp[i - 2] + 5 \cdot dp[i - 3] \\
+        &+ 2 \cdot dp[i - 4] + 2 \cdot dp[i - 5] + 4 \cdot dp[i - 6] \\
+        &+ 2 \cdot dp[i - 7] + 2 \cdot dp[i - 8] + 4 \cdot dp[i - 9] \\
+        &+ \cdots
+\end{aligned}
 $$
 
 where `dp[i]` is a number of ways a $3 \times i$ grid can be completely filled.
@@ -30,10 +32,12 @@ where `dp[i]` is a number of ways a $3 \times i$ grid can be completely filled.
 Instead of $O(n^2)$ dp, we can simplify the equation as such:
 
 $$
-dp[i] = dp[i - 1] * 1 + dp[i - 2] * 2 + dp[i - 3] * 10 \\
-        + 2 \sum_{k \in [0, i - 4] \and 1 \equiv i - k \pmod{3}} \\
-        + 2 \sum_{k \in [0, i - 4] \and 2 \equiv i - k \pmod{3}} \\
-        + 4 \sum_{k \in [0, i - 4] \and 0 \equiv i - k \pmod{3}} \\
+\begin{aligned}
+dp[i] =\;& dp[i - 1] \cdot 1 + dp[i - 2] \cdot 2 + dp[i - 3] \cdot 10 \\
+        &+ 2 \cdot \sum_{\substack{k \in [0,\, i - 4] \\ 1 \equiv i - k \pmod{3}}} 1 \\
+        &+ 2 \cdot \sum_{\substack{k \in [0,\, i - 4] \\ 2 \equiv i - k \pmod{3}}} 1 \\
+        &+ 4 \cdot \sum_{\substack{k \in [0,\, i - 4] \\ 0 \equiv i - k \pmod{3}}} 1
+\end{aligned}
 $$
 
 This sum part is pre-processed in a such way.
