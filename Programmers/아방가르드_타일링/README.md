@@ -33,10 +33,10 @@ Instead of $O(n^2)$ dp, we can simplify the equation as such:
 
 $$
 \begin{aligned}
-dp[i] =\;& dp[i - 1] \cdot 1 + dp[i - 2] \cdot 2 + dp[i - 3] \cdot 10 \\
-        &+ 2 \cdot \sum_{\substack{k \in [0,\, i - 4] \\ 1 \equiv i - k \pmod{3}}} 1 \\
-        &+ 2 \cdot \sum_{\substack{k \in [0,\, i - 4] \\ 2 \equiv i - k \pmod{3}}} 1 \\
-        &+ 4 \cdot \sum_{\substack{k \in [0,\, i - 4] \\ 0 \equiv i - k \pmod{3}}} 1
+dp[i] =\;& 1 \cdot dp[i - 1] + 2 \cdot dp[i - 2] + 5 \cdot dp[i - 3] \\
+        &+ 2 \times \sum_{\substack{k \in [0, i - 4] \\ 1 \equiv i - k \pmod{3}}} \\
+        &+ 2 \times \sum_{\substack{k \in [0, i - 4] \\ 2 \equiv i - k \pmod{3}}} \\
+        &+ 4 \times sum_{\substack{k \in [0, i - 4] \\ 0 \equiv i - k \pmod{3}}}
 \end{aligned}
 $$
 
