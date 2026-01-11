@@ -6,7 +6,7 @@ https://school.programmers.co.kr/learn/courses/30/lessons/138475
 
 Time Complexity Analysis $O(n \log n)$
 
-### Why is it $ O(n \log n) $?
+### Why is it O(nlogn)?
 
 This code works in a way that:
 
@@ -19,10 +19,10 @@ This code works in a way that:
   }
 ```
 
-This is not $ O(n^2) $ since $j$ is incremented by i, which means that
+This is not $O(n^2)$ since $j$ is incremented by $i$.
 
 $$
-\fracn1 + \fracn2 + \cdots + \fracnn = n \cdot \sum_{i = 1}^n  \frac1i
+\frac n1 + \frac n2 + \cdots + \frac nn = n \cdot \sum_{i = 1}^n  \frac1i
 $$
 
 This is a typical harmonic series that converges to $\log n$.
