@@ -1,6 +1,6 @@
 # 아방가르드 타일링
 
-Solved at: 2026-01-11 (30)
+Solved at: 2026-01-11 (30m)
 
 https://school.programmers.co.kr/learn/courses/30/lessons/181186
 
