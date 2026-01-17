@@ -14,7 +14,7 @@ This can be inferred with each positions of the numbers in numpad.
 
 2. Only difference in row/column: 2 \* `diff`
 
-3. Others: 3 _ `min` + 2 _ `diff`
+3. Others: 3 \* `min` + 2 \* `diff`
 
 This can actually be converted to
 
@@ -46,8 +46,7 @@ $dp[number][left][right]$: optimal distance when position of left hand,
 right hand is `left`, `right` and the number is currently `number`.
 
 $$
-dp(number, num, right) = \max (dp(number - 1, k, right)
-+ dist(k, num)), k \in[0, 9]
+dp(number, num, right) = \max (dp(number - 1, k, right) + dist(k, num)), k \in[0, 9]
 $$
 
 vice versa for the right.
