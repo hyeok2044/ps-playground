@@ -17,7 +17,7 @@ This problem is equivalent to $a _ 1 + a _ 2 + \cdots = k, a _ i \ge 1$.
 
 The solution to this is known as $_ {k - n} H _ n$.
 
-Since $_ 15 H _ 5 \le 16000$, All the pairs can be made through bruteforce.
+Since $_ {15} H _ 5 \le 16000$, All the pairs can be made through bruteforce.
 
 ## Calculating the Time taken for each pair
 
