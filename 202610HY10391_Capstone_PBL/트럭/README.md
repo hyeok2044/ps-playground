@@ -21,9 +21,7 @@ Offline Query + Greedy + Binary Search
 
 회사의 총 매출은 모든 소비자가 지불한 금액의 합이다.
 
-$$
-f(sz) = \sum_{i=1}^{N} (\text{consumer } i \text{가 선택한 최대 } P_{i,j})
-$$
+$$f(sz) = \sum_{i=1}^{N} (\text{consumer } i \text{가 선택한 최대 } P_{i,j})$$
 
 이제 $Q$개의 시나리오가 주어진다. 각 시나리오마다 목표 매출 $Q_k$가 주어질 때,
 
